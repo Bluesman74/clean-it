@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <BoostLibrary>C:\ExtBuildUtils\Boost\boost_1_80_0</BoostLibrary>
+    <BoostHeaders>$(BoostLibrary)</BoostHeaders>
+    <BoostLib>$(BoostLibrary)\Lib</BoostLib>
+    <HypodermicLibrary>C:\Dev\Libraries\Hypodermic</HypodermicLibrary>
+    <CppCoroLibrary>C:\Dev\Libraries\cppcoro</CppCoroLibrary>
+    <ExpectedLibary>C:\Dev\Libraries\TartanLLama\expected\include</ExpectedLibary>
+  </PropertyGroup>
+  <PropertyGroup>
+    <IncludePath>$(BoostHeaders);$(ExpectedLibary);$(CppCoroLibrary)\out\install\$(PlatformTarget)-$(Configuration)\include;$(HypodermicLibrary);$(IncludePath)</IncludePath>
+    <LibraryPath>$(CppCoroLibrary)\out\install\$(PlatformTarget)-$(Configuration)\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup />
+  <ItemGroup>
+    <BuildMacro Include="BoostLibrary">
+      <Value>$(BoostLibrary)</Value>
+    </BuildMacro>
+    <BuildMacro Include="BoostHeaders">
+      <Value>$(BoostHeaders)</Value>
+    </BuildMacro>
+    <BuildMacro Include="BoostLib">
+      <Value>$(BoostLib)</Value>
+    </BuildMacro>
+    <BuildMacro Include="HypodermicLibrary">
+      <Value>$(HypodermicLibrary)</Value>
+    </BuildMacro>
+    <BuildMacro Include="CppCoroLibrary">
+      <Value>$(CppCoroLibrary)</Value>
+    </BuildMacro>
+    <BuildMacro Include="ExpectedLibary">
+      <Value>$(ExpectedLibary)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
