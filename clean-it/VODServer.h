@@ -3,6 +3,7 @@
 #include "IStreamer.h"
 #include "IVODServer.h"
 #include "Logger.h"
+#include <thread>
 
 import <memory>;
 import <vector>;
