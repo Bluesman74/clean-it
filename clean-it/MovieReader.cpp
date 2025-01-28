@@ -1,4 +1,4 @@
-module;
+import VOD;
 
 #include "MovieReader.h"
 
@@ -6,23 +6,22 @@ module;
 #include <ranges>
 #include <sstream>
 
-module VOD;
-
-namespace ci {
+namespace ci
+{
 
 	// read all movie files from the folder named path eagerly.
-	auto MovieReader::readAvailableMovies(
-		const std::string& path) noexcept -> expected<std::vector<Movie>> {
+	auto MovieReader::readAvailableMovies(const std::string& path) noexcept -> expected<std::vector<Movie>>
+    {
 
-		return expect([&] 
+		return expect([&]
 		{
 			return readAvailableMovies(readMovies(path));
 		});
 	}
 
 	// read one movie from a file named fileName.
-	auto MovieReader::readMovie(
-		const std::string& fileName) -> expected<Movie> {
+	auto MovieReader::readMovie(const std::string& fileName) -> expected<Movie>
+    {
 
 		// Using the functional syntax provided by tl::expected
 
@@ -39,16 +38,16 @@ namespace ci {
 
 	// read all movies from a generator eagerly.
 	// Note: may throw on the first iteration of the generator.
-	auto MovieReader::readAvailableMovies(
-		cppcoro::generator<expected<Movie>> generator) -> std::vector<Movie> {
+	auto MovieReader::readAvailableMovies(cppcoro::generator<expected<Movie>> generator) -> std::vector<Movie>
+    {
 
 		using namespace std::ranges::views;
 
-		auto movies = common(generator) |
-			filter([](const expected<Movie>& e) { return e.has_value(); }) |
-			transform([](const expected<Movie>& e) { return e.value<Movie>(); });
+	    auto movies = common(generator)
+                    | filter([](const expected<Movie>& e) { return e.has_value(); })
+                    | transform([](const expected<Movie>& e) { return e.value<Movie>(); });
 
-		std::vector<Movie> movieVec{};
+	    std::vector<Movie> movieVec;
 		std::ranges::copy(movies, std::back_inserter(movieVec));
 
 		return movieVec;
@@ -59,14 +58,15 @@ namespace ci {
 	auto MovieReader::readMovies(
 		const std::string& path) -> cppcoro::generator<expected<Movie>> {
 
-		for (const auto& entry : std::filesystem::directory_iterator(path)) {
+		for (const auto& entry : std::filesystem::directory_iterator(path))
+        {
 			co_yield readMovie(entry.path().string());
 		}
 	}
 
 	// opens the file named fileName.
-	auto MovieReader::openFile(
-		const std::string& fileName) -> expected<std::ifstream>{
+	auto MovieReader::openFile(const std::string& fileName) -> expected<std::ifstream>
+    {
 
 		std::ifstream file(fileName);
 		if (!file.is_open()) {
@@ -76,11 +76,12 @@ namespace ci {
 	}
 
 	// read a line from the file.
-	auto MovieReader::readLine(
-		std::ifstream& file) -> expected<std::string>  {
+	auto MovieReader::readLine(std::ifstream& file) -> expected<std::string>
 
-		std::string line{};
-		if (!getline(file, line)) {
+    {
+		std::string line;
+		if (!getline(file, line))
+        {
 			const auto* error = file.bad()
 				? "error while reading file"
 				: "file has the wrong format";
@@ -90,13 +91,14 @@ namespace ci {
 	}
 
 	// parse the first line in the file to determine its duration.
-	auto MovieReader::parseMovie(
-		const std::string& line, const std::string& fileName) -> expected<Movie> {
+    expected<Movie> MovieReader::parseMovie(const std::string& line, const std::string& fileName)
+    {
 
 		std::stringstream linestream(line);
 		int seconds{};
 		linestream >> seconds;
-		if (linestream.fail()) {
+		if (linestream.fail())
+        {
 			return unexpected{ "error reading file" };
 		}
 		return Movie::create(fileName, seconds);

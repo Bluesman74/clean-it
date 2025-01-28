@@ -2,6 +2,7 @@
 
 import <mutex>;
 import <condition_variable>;
+import <chrono>;
 
 class ManualResetEvent
 {

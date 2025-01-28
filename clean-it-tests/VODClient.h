@@ -1,6 +1,8 @@
 #pragma once
 
 import <memory>;
+import <chrono>;
+
 import VOD;
 
 #include "ManualResetEvent.h"

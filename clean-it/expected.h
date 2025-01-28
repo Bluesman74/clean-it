@@ -5,7 +5,8 @@ import <tl/expected.hpp>;
 import <string>;
 import <type_traits>;
 
-namespace ci {
+namespace ci
+{
 	template<typename T>
 	using expected = tl::expected<T, std::string>;
 

@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <BoostLibrary>C:\ExtBuildUtils\Boost\boost_1_80_0</BoostLibrary>
+    <BoostLibrary>C:\ExtBuildUtils\Boost\boost_1_81_0</BoostLibrary>
     <BoostHeaders>$(BoostLibrary)</BoostHeaders>
     <BoostLib>$(BoostLibrary)\Lib</BoostLib>
     <HypodermicLibrary>C:\Dev\Libraries\Hypodermic</HypodermicLibrary>

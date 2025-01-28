@@ -4,10 +4,9 @@
 #include "Movie.h"
 #include "expected.h"
 
-#include <cppcoro/generator.hpp>
-
 import <string>;
 import <fstream>;
+import <cppcoro/generator.hpp>;
 
 namespace ci {
 

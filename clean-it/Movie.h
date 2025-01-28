@@ -3,9 +3,10 @@
 #include "expected.h"
 
 import <string>;
-#include <chrono>
+import <chrono>;
 
-namespace ci {
+namespace ci
+{
 	using namespace std::chrono_literals;
 
 	class Movie
@@ -16,11 +17,12 @@ namespace ci {
 		std::string Name;
 		std::chrono::seconds Duration;
 
-		static expected<Movie> create(
-			const std::string& name, int seconds) noexcept {
+		static expected<Movie> create(const std::string& name, int seconds) noexcept
+		{
 
-			if (const auto duration = std::chrono::seconds(seconds); 
-				duration > MaxDuration || duration < 1s) {
+			if (const auto duration = std::chrono::seconds(seconds);
+				duration > MaxDuration || duration < 1s)
+			{
 				return unexpected ("invalid duration");
 			}
 			return Movie(name, std::chrono::seconds(seconds));
@@ -35,7 +37,8 @@ namespace ci {
 		// does not apply here.
 		Movie(std::string name, std::chrono::seconds seconds) :
 			Name(std::move(name)),
-			Duration(seconds) {
+			Duration(seconds)
+		{
 		}
 	};
 }
